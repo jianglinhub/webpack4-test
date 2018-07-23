@@ -1,0 +1,25 @@
+{
+  "name": "webpack4-test",
+  "version": "1.0.0",
+  "description": "webpack4 test",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production"
+  },
+  "keywords": [
+    "webpack4",
+    "vue"
+  ],
+  "repository": "http://xxxx.git",
+  "author": "（jianglin）1403192518@qq.com",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  }
+}
