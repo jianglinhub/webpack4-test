@@ -1,11 +1,11 @@
 <template>
-  <div>AAA</div>
+  <div>ABC</div>
 </template>
 
 <script>
   export default {
     mounted() {
-      console.log('ok')
+      console.log(bbb)
     }
   }
 </script>

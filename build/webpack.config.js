@@ -9,12 +9,13 @@ const isDev = process.env.NODE_ENV === 'development'
 
 const config = {
   mode: isDev ? 'development' : 'production',
+  entry: './src/main.js',
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader?cacheDirectory=true'
       }, {
         test: /\.vue$/,
         loader: 'vue-loader'
@@ -29,33 +30,40 @@ const config = {
   },
   target: 'web',
   resolve: {
-    extensions: ['.js', '.json', '.css'],
-    alias: {}
+    extensions: ['.js', '.json', '.css']
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../index.html')
-    }),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: isDev ? '[name].css' : '[name].[hash].css',
-      chunkFilename: isDev ? '[id].css' : '[id].[hash].css'
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../index.html')
     })
-  ]
-}
-
-if (isDev) {
-  config.devtool = 'eval-source-map',
-  config.devServer = {
-    proxy: {
-      '/api': 'http://www.baidu.com'
-    },
-    compress: true
-  }
-} else {
-  config.optimization = {
+  ],
+  optimization: {
     splitChunks: {
-      chunks: 'all'
+      cacheGroups: {
+        vendor:{
+          chunks: 'all',
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          minChunks: 1,
+          maxInitialRequests: 5,
+          minSize: 0,
+          priority: 100
+        },
+        common: {
+          chunks: 'all',
+          test: /[\\/]node_modules[\\/]/,
+          name: 'common',
+          minChunks: 2,
+          maxInitialRequests: 5,
+          minSize: 0,
+          priority: 1
+        }
+      }
     },
     runtimeChunk: {
       name: entrypoint => `runtimechunk~${entrypoint.name}`
@@ -67,6 +75,16 @@ if (isDev) {
       }),
       new OptimizeCSSAssetsPlugin({})
     ]
+  }
+}
+
+if (isDev) {
+  config.devtool = 'eval-source-map',
+  config.devServer = {
+    proxy: {
+      '/api': 'http://www.baidu.com'
+    },
+    compress: true
   }
 }
 
