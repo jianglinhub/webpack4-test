@@ -1,17 +1,13 @@
 <template>
-  <div>ABC</div>
+  <div>DDD</div>
 </template>
 
 <script>
-  export default {
-    mounted() {
-      console.log(bbb)
-    }
-  }
+  export default {}
 </script>
 
 <style>
   .abc {
-    background-color: #fff;
+    background-color: #eeee;
   }
 </style>
