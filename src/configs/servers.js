@@ -16,7 +16,7 @@ const servers = {
     sys: '',
     wms: '',
     sign: ''
-  },
+  }
 };
 
 export default servers;

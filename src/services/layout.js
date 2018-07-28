@@ -4,19 +4,18 @@ const { post: ssoPost } = http.create('sso');
 const { post: smsPost } = http.create('sms');
 const { post } = http.create('zk');
 
-export function login(param) {
+export function login (param) {
   return ssoPost('/common/web/mobile/login-by-code.do', {
-    ...param,
+    ...param
   });
 }
 
-export function getCode(param) {
+export function getCode (param) {
   return smsPost('/verifycode/get.do', {
-    ...param,
+    ...param
   });
 }
 
-export function getUserAuth(param) {
+export function getUserAuth (param) {
   return post('/web/user/get-user-menus', param);
 }
-

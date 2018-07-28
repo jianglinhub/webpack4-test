@@ -1,19 +1,19 @@
-const path = require('path')
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-const { VueLoaderPlugin } = require('vue-loader')
+const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
-const isDev = process.env.NODE_ENV === 'development'
-const mode = isDev ? 'development' : 'production'
-const target = 'web'
-const devtool = 'eval-source-map'
-const entry = './src/main.js'
-const resolve = {  extensions: ['.js', '.json', '.css'] }
+const isDev = process.env.NODE_ENV === 'development';
+const mode = isDev ? 'development' : 'production';
+const target = 'web';
+const devtool = 'eval-source-map';
+const entry = './src/main.js';
+const resolve = { extensions: ['.js', '.json', '.css'] };
 const proxy = {
   '/api': 'http://www.baidu.com'
-}
+};
 
 const modules = {
   rules: [{
@@ -30,18 +30,18 @@ const modules = {
       'css-loader'
     ]
   }]
-}
+};
 
 const plugins = [
   new VueLoaderPlugin(),
   new MiniCssExtractPlugin({
     filename: isDev ? '[name].css' : '[name].[hash].css',
-    chunkFilename: isDev ? '[id].css' : '[id].[hash].css',
+    chunkFilename: isDev ? '[id].css' : '[id].[hash].css'
   }),
   new HtmlWebpackPlugin({
     template: path.join(__dirname, '../index.html')
   })
-]
+];
 
 const optimization = {
   splitChunks: {
@@ -82,7 +82,7 @@ const optimization = {
     }),
     new OptimizeCSSAssetsPlugin({})
   ]
-}
+};
 
 const config = {
   mode,
@@ -92,13 +92,13 @@ const config = {
   resolve,
   plugins,
   optimization
-}
+};
 
 if (isDev) {
-  config.devtool = devtool
+  config.devtool = devtool;
   config.devServer = {
     proxy,
     compress: true
-  }
+  };
 }
-module.exports = config
+module.exports = config;
