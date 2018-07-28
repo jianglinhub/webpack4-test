@@ -1,1 +1,7 @@
+<<<<<<< 8cf092d34d2e436ffbae38e6ea20610567bb8d5b
 node_modules
+=======
+/config
+/node_modules
+/*.js
+>>>>>>> test: eslint
